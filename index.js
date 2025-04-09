@@ -9,7 +9,7 @@ const path=require('path') //path is an inbuilt model in node.js
 
 
 const app=express()
-const PORT= 4000;
+const PORT= process.env.PORT || 4000; //this is changes after deploying ...since port number can be anything 
 dotEnv.config()
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log("Mongodb connected successfully"))
@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.listen(PORT,()=>{
     console.log(`server started and running at ${PORT}`);
 });
-app.use('/home',(req,res)=>{
+app.use('/',(req,res)=>{
     res.send("<h1>Welcome to Travel_now");
 })
 
