@@ -2,6 +2,8 @@ const Firm = require('../models/Firm');
 // const firm =require('../models/Firm');
 const Vendor=require('../models/Vendor'); //we want firms to be linked with vendor soo need Vendor model tooo
 const multer=require('multer');
+const path = require('path');
+
 
 
     //multer config
@@ -18,7 +20,11 @@ const upload = multer({ storage: storage });
 
 const addFirm=async(req,res)=>{
     try{
-    const {firmname, area, operatingRegions, firmType}=req.body
+    const {firmName, area, firmType}=req.body
+
+    if (!firmName) {
+        return res.status(400).json({ error: "firmName is required" });
+      }
 
     const image=req.file?req.file.filename:undefined;
 
@@ -29,7 +35,7 @@ const addFirm=async(req,res)=>{
     }
 
     const firm=new Firm({
-        firmname, area, operatingRegions, firmType, image, vendor:vendor._id 
+        firmName, area, firmType, image, vendor:vendor._id 
     })
 
     const savedFirm=await firm.save(); //saving firm detials under vendor in database 

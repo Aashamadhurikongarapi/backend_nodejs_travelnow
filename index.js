@@ -6,11 +6,17 @@ const bodyParser=require('body-parser');
 const firmRoutes=require('./routes/firmRoutes');
 const productRoutes=require('./routes/productRoutes');
 const path=require('path') //path is an inbuilt model in node.js
+const cors=require('cors') //this is used to allow cross-origin requests
 
 
 const app=express()
+
 const PORT= process.env.PORT || 4000; //this is changes after deploying ...since port number can be anything 
+
 dotEnv.config()
+app.use(cors()) //this is used to allow cross-origin requests
+
+
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log("Mongodb connected successfully"))
     .catch((error)=>console.log("error"))

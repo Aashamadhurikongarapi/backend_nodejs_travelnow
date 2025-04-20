@@ -1,22 +1,22 @@
 const mongoose=require('mongoose');
 const FirmSchema=new mongoose.Schema({
-    firmname:{
+    firmName:{
         type:String,
-        require:true,
-        unique:true
+        required:true,
+        
     },
     area:{
         type:String,
         require:true
     },
-    operatingRegions:{
-        type:String,
-        require:true
-    },
+    // operatingRegions:{
+    //     type:String,
+        
+    // },
     firmType:{
         type:[{
             type:String,
-            enum:['Travel Agency','Individual Owner'],
+            enum:['Travel-Agency','Individual-Owner'],
             require:true
         }]
     },
@@ -24,7 +24,7 @@ const FirmSchema=new mongoose.Schema({
         type:String
 
     },  
-    vendor:[{ //connecting FIrm to Vendor
+    vendor:[{ //connecting FIrm to Vendor //should npt be an arrya, should be an onject
             type:mongoose.Schema.Types.ObjectId,
             ref:'Vendor'
         }],
